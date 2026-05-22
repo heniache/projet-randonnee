@@ -2,24 +2,30 @@ import { useState, useEffect } from "react";
 import "../styles/ShoppingList.css";
 import Item from "./Item";
 
+// Ce composant affiche la liste des vêtements.
+// Il reçoit le panier actuel "cart" et la fonction "updateCart" depuis le composant parent.
 function ShoppingList({ cart, updateCart }) {
+  // Cette fonction ajoute un article dans le panier.
+  // Si l'article existe déjà, elle augmente seulement sa quantité.
+  // Sinon, elle ajoute un nouvel article avec une quantité de 1.
   function addToCart(name, price) {
-    // Vérifier si l'article existe déjà dans le panier
     const existingItem = cart.find((item) => item.name === name);
+
     if (existingItem) {
-      // Si l'article existe, mettre à jour sa quantité
       updateCart(
         cart.map((item) =>
           item.name === name ? { ...item, amount: item.amount + 1 } : item,
         ),
       );
     } else {
-      // Si l'article n'existe pas encore, l'ajouter au panier
       updateCart([...cart, { name, price, amount: 1 }]);
     }
   }
 
   const [itemsList, setItemsList] = useState([]);
+
+  // Ce useEffect récupère la liste des vêtements depuis le backend.
+  // Il s'exécute une seule fois au chargement du composant grâce au tableau vide [].
   useEffect(() => {
     fetch(`http://localhost:3001/`)
       .then((response) => response.json())
@@ -35,12 +41,13 @@ function ShoppingList({ cart, updateCart }) {
     <div>
       <ul className="item-list">
         {itemsList.map((item) => (
-          <li className="item">
-            {/*item.name*/}
-            {/*item.price*/}
+          <li className="item" key={item.id}>
             <br />
+
             {item.onSale === 1 && <div className="sales">Soldes</div>}
+
             <br />
+
             <Item
               id={item.id}
               cover={item.cover}
@@ -49,6 +56,7 @@ function ShoppingList({ cart, updateCart }) {
               comfort={item.comfort}
               price={item.price}
             />
+
             <button
               className="button-Add"
               onClick={() => addToCart(item.name, item.price)}

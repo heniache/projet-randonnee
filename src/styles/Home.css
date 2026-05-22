@@ -10,5 +10,6 @@
 }
 
 .shopping-list {
-  height: 80; /* 2/3 de l'écran */
+  flex: 1;
+  width: 100%;
 }

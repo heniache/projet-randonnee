@@ -13,6 +13,7 @@ import { PreferencesProvider } from "./context";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { PreferencesContext } from "./context";
+import Cart from "./components/Cart";
 
 function AppLayout() {
   const { darkMode } = useContext(PreferencesContext);
@@ -21,7 +22,7 @@ function AppLayout() {
   return (
     <Router>
       <div className={`app-wrapper ${darkMode ? "dark-mode" : ""}`}>
-        <Header cart={cart} updateCart={updateCart} />
+        <Header cart={cart} />
         <div className="app-content">
           <Switch>
             <Route exact path="/">
@@ -39,6 +40,10 @@ function AppLayout() {
 
             <Route path="/profile">
               <Profile />
+            </Route>
+
+            <Route path="/cart">
+              <Cart cart={cart} updateCart={updateCart} />
             </Route>
 
             <Route path="*">

@@ -1,12 +1,10 @@
-import { useState } from "react";
 import mountain from "../assets/mountain.png";
+import panier from "../assets/panier.png";
 import { Link } from "react-router-dom";
-import Cart from "./Cart";
 import "../styles/header.css";
 
-function Header({ cart, updateCart }) {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
+function Header({ cart = [] }) {
+  const nombreArticles = cart.reduce((total, item) => total + item.amount, 0);
   return (
     <div className="header-container">
       <div className="header-left">
@@ -18,20 +16,14 @@ function Header({ cart, updateCart }) {
         <Link to="/">Accueil</Link>
         <Link to="/preferences">Préférences</Link>
         <Link to="/login">Connexion</Link>
+        <Link to="/cart" className="cart-link">
+          <img className="panier" src={panier} alt="panier" />
 
-        <button
-          className="cart-header-button"
-          onClick={() => setIsCartOpen(!isCartOpen)}
-        >
-          Panier
-        </button>
+          {nombreArticles > 0 && (
+            <span className="cart-badge">{nombreArticles}</span>
+          )}
+        </Link>
       </nav>
-
-      {isCartOpen && (
-        <div className="cart-dropdown">
-          <Cart cart={cart} updateCart={updateCart} />
-        </div>
-      )}
     </div>
   );
 }
