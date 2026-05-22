@@ -1,0 +1,97 @@
+.login-page {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f7fb;
+  padding: 40px 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 35px 30px;
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #222;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form input {
+  padding: 14px 16px;
+  border: 1px solid #dcdfe6;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.login-form input:focus {
+  border-color: cadetblue;
+  box-shadow: 0 0 0 3px rgba(91, 109, 249, 0.12);
+}
+
+.main-button {
+  margin-top: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: cadetblue;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.main-button:hover {
+  background: #4958d9;
+}
+
+.switch-text {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 14px;
+}
+
+.switch-button {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid cadetblue;
+  border-radius: 10px;
+  background: white;
+  color: cadetblue;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.switch-button:hover {
+  background: #eef1ff;
+}
+
+.error-message {
+  background: #ffe5e5;
+  color: #c62828;
+  border: 1px solid #f5b5b5;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  text-align: center;
+}

@@ -1,0 +1,132 @@
+.itemDetails-page {
+  --detail-content-width: min(90vw, 420px);
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.detail-heading {
+  width: var(--detail-content-width);
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  background-color: #117380;
+  color: white;
+  border-radius: 14px;
+  padding: 12px 20px;
+}
+
+.item-details-content,
+.item-details-form {
+  width: var(--detail-content-width);
+  margin: 0 auto;
+  padding: 18px;
+  border: 1px solid #d0d7de;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+  box-sizing: border-box;
+}
+
+.article-id {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: #6f7a86;
+}
+
+.detail-name {
+  margin: 0;
+  text-align: center;
+}
+
+.detail-image {
+  display: block;
+  width: 100%;
+  margin: 14px auto;
+  border: 1px solid #c9d4df;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.detail-meta {
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.detail-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.detail-input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid #b8c3ce;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.detail-actions {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.itemDetails-page .button-Add {
+  margin-top: 2px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+}
+
+.itemDetails-page .button-Add:hover {
+  background-color: #3e8e41;
+}
+
+.itemDetails-page.dark-mode {
+  background-color: #1f252b;
+  color: #f2f5f8;
+}
+
+.itemDetails-page.dark-mode .detail-heading {
+  background-color: #0d5b66;
+}
+
+.itemDetails-page.dark-mode .item-details-content,
+.itemDetails-page.dark-mode .item-details-form {
+  background-color: #2a333b;
+  border-color: #485564;
+  box-shadow: none;
+}
+
+.itemDetails-page.dark-mode .article-id {
+  color: #c6d0db;
+}
+
+.itemDetails-page.dark-mode .detail-input {
+  background-color: #1f252b;
+  color: #f2f5f8;
+  border-color: #5c6b7b;
+}
+
+@media (max-width: 480px) {
+  .item-details-content,
+  .item-details-form {
+    padding: 14px;
+  }
+
+  .itemDetails-page .button-Add {
+    width: 100%;
+  }
+}

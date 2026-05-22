@@ -1,0 +1,45 @@
+.footer {
+  color: black;
+  border-top: solid 1px black;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.footer-email {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%; /* Pour s'adapter à la largeur du parent */
+  max-width: 400px; /* Largeur maximale pour un meilleur design */
+}
+.email-label {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.email-textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical; /* Permet de redimensionner verticalement
+seulement */
+  font-size: 14px;
+  font-family: inherit; /* Utilise la même police que le reste
+de l'application */
+}
+.email-textarea:focus {
+  border-color: #4a90e2; /* Couleur de bordure lors du focus
+*/
+  outline: none; /* Supprime le contour par défaut lors du
+focus */
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Ajoute une
+ombre bleue lors du focus */
+}

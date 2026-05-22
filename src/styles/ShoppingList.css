@@ -1,0 +1,40 @@
+.item-list {
+  list-style-type: none;
+  padding: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.item {
+  border: solid 2px black;
+  border-radius: 10px;
+  height: 300px;
+  width: 200px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.item-cover {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.sales {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  font-weight: 500;
+  color: white;
+  padding: 5px 10px;
+  background-color: #e69946;
+}
+/* .item-list :hover {
+  height: 350px;
+  width: 350px;
+} */

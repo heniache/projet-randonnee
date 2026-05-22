@@ -1,0 +1,14 @@
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+}
+
+.shopping-list {
+  height: 80; /* 2/3 de l'écran */
+}
