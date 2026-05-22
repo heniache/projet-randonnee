@@ -1,3 +1,302 @@
-.cart {
-  background-color: aliceblue;
+.cart-page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.cart-title {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.empty-cart {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+
+  background-color: white;
+}
+
+.cart-item-image {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cart-item-info h3 {
+  margin: 0 0 10px 0;
+}
+
+.cart-item-info p {
+  margin: 4px 0;
+}
+
+.cart-actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.quantity-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  width: fit-content;
+  padding: 3px 8px;
+
+  border: 2px solid cadetblue;
+  border-radius: 20px;
+
+  background-color: white;
+}
+
+.quantity {
+  min-width: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
+
+.quantity-actions .MuiIconButton-root {
+  color: black;
+  padding: 4px;
+  transition: none;
+}
+
+.quantity-actions .MuiIconButton-root:hover {
+  background-color: transparent;
+  color: black;
+  transform: none;
+  box-shadow: none;
+}
+
+.cart-summary {
+  margin-top: 30px;
+  padding: 20px;
+
+  border-top: 2px solid #ddd;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.clear-cart {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  background-color: cadetblue;
+  color: white;
+  font-weight: bold;
+
+  transition: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.clear-cart:hover {
+  background-color: cadetblue;
+  color: white;
+  transform: none;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.order-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  background-color: cadetblue;
+  color: white;
+  font-weight: bold;
+
+  transition: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.order-button:hover {
+  background-color: cadetblue;
+  color: white;
+  transform: none;
+  box-shadow: none;
+  opacity: 1;
+}
+
+/* MODE SOMBRE POUR LA PAGE PANIER */
+
+.dark-mode .cart-page {
+  color: white;
+}
+
+.dark-mode .cart-title {
+  color: white;
+}
+
+.dark-mode .empty-cart {
+  color: white;
+}
+
+.dark-mode .cart-item {
+  background-color: #1f1f1f;
+  border: 1px solid #444;
+  color: white;
+}
+
+.dark-mode .cart-item-info h3 {
+  color: white;
+}
+
+.dark-mode .cart-item-info p {
+  color: #e0e0e0;
+}
+
+.dark-mode .cart-summary {
+  border-top: 2px solid #444;
+  color: white;
+}
+
+/* Bloc quantité avec les boutons MUI */
+.dark-mode .quantity-actions {
+  background-color: #2a2a2a;
+  border: 2px solid cadetblue;
+}
+
+.dark-mode .quantity {
+  color: white;
+}
+
+/* Icônes MUI en mode sombre */
+.dark-mode .quantity-actions .MuiIconButton-root {
+  color: white;
+}
+
+.dark-mode .quantity-actions .MuiIconButton-root:hover {
+  background-color: transparent;
+  color: white;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Boutons classiques en mode sombre */
+.dark-mode .clear-cart,
+.dark-mode .order-button {
+  background-color: cadetblue;
+  color: white;
+}
+
+.dark-mode .clear-cart:hover,
+.dark-mode .order-button:hover {
+  background-color: cadetblue;
+  color: white;
+  transform: none;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.dark-mode .quantity-actions {
+  background-color: #2a2a2a;
+  border: 2px solid cadetblue;
+}
+
+.dark-mode .quantity-actions .MuiIconButton-root {
+  color: white;
+}
+
+.select-all-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+
+  background-color: white;
+}
+
+.cart-checkbox-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-checkbox.MuiCheckbox-root {
+  color: cadetblue;
+  transition: none;
+}
+
+.cart-checkbox.Mui-checked {
+  color: cadetblue;
+}
+
+.cart-checkbox.MuiCheckbox-root:hover {
+  background-color: transparent;
+}
+
+.order-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dark-mode .select-all-line {
+  color: white;
+}
+
+.dark-mode .cart-item {
+  background-color: #1f1f1f;
+  border: 1px solid #444;
+  color: white;
+}
+
+.dark-mode .cart-checkbox.MuiCheckbox-root {
+  color: cadetblue;
+}
+
+.dark-mode .cart-checkbox.Mui-checked {
+  color: cadetblue;
+}
+
+.dark-mode .cart-checkbox.MuiCheckbox-root:hover {
+  background-color: transparent;
+}
+
+.dark-mode .order-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

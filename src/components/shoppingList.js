@@ -8,17 +8,27 @@ function ShoppingList({ cart, updateCart }) {
   // Cette fonction ajoute un article dans le panier.
   // Si l'article existe déjà, elle augmente seulement sa quantité.
   // Sinon, elle ajoute un nouvel article avec une quantité de 1.
-  function addToCart(name, price) {
-    const existingItem = cart.find((item) => item.name === name);
+  function addToCart(article) {
+    const existingItem = cart.find((item) => item.id === article.id);
 
     if (existingItem) {
       updateCart(
         cart.map((item) =>
-          item.name === name ? { ...item, amount: item.amount + 1 } : item,
+          item.id === article.id ? { ...item, amount: item.amount + 1 } : item,
         ),
       );
     } else {
-      updateCart([...cart, { name, price, amount: 1 }]);
+      updateCart([
+        ...cart,
+        {
+          id: article.id,
+          name: article.name,
+          price: article.price,
+          cover: article.cover,
+          size: article.size,
+          amount: 1,
+        },
+      ]);
     }
   }
 
@@ -57,10 +67,7 @@ function ShoppingList({ cart, updateCart }) {
               price={item.price}
             />
 
-            <button
-              className="button-Add"
-              onClick={() => addToCart(item.name, item.price)}
-            >
+            <button className="button-Add" onClick={() => addToCart(item)}>
               Ajouter
             </button>
           </li>
