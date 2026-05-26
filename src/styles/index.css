@@ -62,14 +62,39 @@
   color: #f2f5f8;
 }
 
-.app-wrapper.dark-mode button {
+.app-wrapper.dark-mode button:not(.main-button):not(.switch-button) {
   border-color: #f2f5f8;
   color: #f2f5f8;
 }
 
-.app-wrapper.dark-mode button:hover {
+.app-wrapper.dark-mode button:not(.main-button):not(.switch-button):hover {
   background-color: #f2f5f8;
   color: #1f252b;
+}
+
+.app-wrapper.dark-mode .main-button {
+  background: cadetblue;
+  color: white;
+  border-color: cadetblue;
+}
+
+.app-wrapper.dark-mode .main-button:hover {
+  background: #4a8fa8;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 8px 15px;
+}
+
+.app-wrapper.dark-mode .switch-button {
+  background: transparent;
+  border-color: cadetblue;
+  color: cadetblue;
+}
+
+.app-wrapper.dark-mode .switch-button:hover {
+  background: rgba(95, 158, 160, 0.15);
+  color: cadetblue;
+  box-shadow: none;
+  transform: none;
 }
 
 body {
