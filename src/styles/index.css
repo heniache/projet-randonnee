@@ -56,10 +56,17 @@
 }
 
 .app-wrapper.dark-mode .login-form input,
-.app-wrapper.dark-mode .email-textarea {
+.app-wrapper.dark-mode .email-textarea,
+.app-wrapper.dark-mode .profile-value,
+.app-wrapper.dark-mode .profile-input {
   background-color: #1f252b;
   border-color: #5c6b7b;
   color: #f2f5f8;
+}
+
+.app-wrapper.dark-mode .profile-label,
+.app-wrapper.dark-mode .profile-loading {
+  color: #c4cdd5;
 }
 
 .app-wrapper.dark-mode button:not(.main-button):not(.switch-button) {

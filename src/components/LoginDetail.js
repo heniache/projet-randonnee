@@ -3,6 +3,10 @@ import { useHistory } from "react-router-dom";
 function LoginDetail() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [adresse, setAdresse] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useHistory();
@@ -32,7 +36,11 @@ function LoginDetail() {
         const response = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify(
+            isSignup
+              ? { email, password, nom, prenom, telephone, adresse }
+              : { email, password }
+          ),
         });
 
         const data = await response.json();
@@ -44,6 +52,10 @@ function LoginDetail() {
         if (isSignup) {
           setIsSignup(false);
           setPassword("");
+          setNom("");
+          setPrenom("");
+          setTelephone("");
+          setAdresse("");
           alert(
             "Compte créé avec succès. Vous pouvez maintenant vous connecter.",
           );
@@ -79,6 +91,36 @@ function LoginDetail() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {/* Ces champs n'apparaissent qu'en mode inscription */}
+          {isSignup && (
+            <>
+              <input
+                type="text"
+                placeholder="Nom"
+                value={nom}
+                onChange={(e) => setNom(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Prénom"
+                value={prenom}
+                onChange={(e) => setPrenom(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Téléphone"
+                value={telephone}
+                onChange={(e) => setTelephone(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Adresse"
+                value={adresse}
+                onChange={(e) => setAdresse(e.target.value)}
+              />
+            </>
+          )}
 
           <button type="submit" className="main-button">
             {isSignup ? "S'inscrire" : "Se connecter"}

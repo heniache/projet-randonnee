@@ -44,6 +44,7 @@
 }
 
 .main-button {
+  width: 100%;
   margin-top: 10px;
   padding: 14px;
   border: none;
@@ -94,4 +95,80 @@
   margin-bottom: 18px;
   font-size: 14px;
   text-align: center;
+}
+
+.profile-card {
+  max-width: 520px;
+}
+
+.profile-details {
+  display: grid;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 24px;
+}
+
+.profile-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.profile-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.profile-value {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid #dcdfe6;
+  border-radius: 10px;
+  background: #fbfcfe;
+  font-size: 15px;
+  color: #222;
+  text-align: left;
+  word-break: break-word;
+}
+
+.profile-loading {
+  text-align: center;
+  color: #555;
+  margin: 10px 0 0;
+}
+
+.profile-logout-button {
+  margin-top: 12px;
+}
+
+.profile-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  border: 1px solid #dcdfe6;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+  background: white;
+  color: #222;
+}
+
+.profile-input:focus {
+  border-color: cadetblue;
+  box-shadow: 0 0 0 3px rgba(91, 109, 249, 0.12);
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.profile-actions .main-button {
+  margin-top: 0;
 }

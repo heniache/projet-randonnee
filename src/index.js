@@ -3,7 +3,11 @@ import { useContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import "./styles/index.css";
 import Home from "./pages/Home";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Detail from "./pages/Detail";
 import Preferences from "./pages/Preferences";
 import Error from "./pages/Error";

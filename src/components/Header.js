@@ -5,6 +5,7 @@ import "../styles/header.css";
 
 function Header({ cart = [] }) {
   const nombreArticles = cart.reduce((total, item) => total + item.amount, 0);
+
   return (
     <div className="header-container">
       <div className="header-left">
@@ -16,6 +17,9 @@ function Header({ cart = [] }) {
         <Link to="/">Accueil</Link>
         <Link to="/preferences">Préférences</Link>
         <Link to="/login">Connexion</Link>
+        <Link to="/profile" className="profile-link">
+          Profile
+        </Link>
         <Link to="/cart" className="cart-link">
           <img className="panier" src={panier} alt="panier" />
 
