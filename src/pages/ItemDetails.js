@@ -1,5 +1,5 @@
 import "../styles/ItemDetails.css";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { PreferencesContext } from "../context";
 
@@ -8,6 +8,7 @@ import { PreferencesContext } from "../context";
 function ItemDetails() {
   const { idArticle } = useParams();
   const { darkMode } = useContext(PreferencesContext);
+  const navigate = useHistory();
 
   const [itemDetail, setItemDetail] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -22,6 +23,9 @@ function ItemDetails() {
 
   const [image, setImage] = useState(null);
   const [userId, setUserId] = useState("");
+  const [role, setRole] = useState("");
+  const [uploadError, setUploadError] = useState(null);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   // Cette fonction récupère l'image choisie par l'utilisateur dans l'input file.
   // Elle stocke ensuite cette image dans le state "image".
@@ -37,39 +41,54 @@ function ItemDetails() {
     if (token) {
       const userId = localStorage.getItem("userId");
       setUserId(userId);
+      // On lit aussi le rôle stocké à la connexion
+      setRole(localStorage.getItem("role"));
     }
   }, []);
 
   // Cette fonction envoie l'image sélectionnée vers le backend.
   // Si l'upload réussit, elle récupère l'URL de l'image et met à jour le vêtement avec cette nouvelle image.
+  // Cette fonction envoie l'image sélectionnée vers le backend.
+  // La route /upload met déjà à jour le cover en base : on rafraîchit juste l'affichage.
   const handleImageUpload = () => {
     if (!image) {
-      console.error("Aucune image sélectionnée.");
+      setUploadError("Veuillez sélectionner une image.");
       return;
     }
 
+    setUploadError(null);
+    setUploadSuccess(false);
+
     const formData = new FormData();
+    const token = localStorage.getItem("token");
+
     formData.append("image", image);
     formData.append("vetementId", idArticle);
 
     fetch("http://localhost:3001/upload", {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
       body: formData,
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((data) => {
+            throw new Error(data.error || "Erreur lors de l'upload.");
+          });
+        }
+        return response.json();
+      })
       .then((data) => {
-        const imageUrl = data.imageUrl;
-
-        const itemWithNewImage = {
-          ...updatedItem,
-          cover: imageUrl,
-        };
-
-        handleUpdateVetement(itemWithNewImage);
+        setItemDetail((prev) => ({ ...prev, cover: data.imageUrl }));
+        setUpdatedItem((prev) => ({ ...prev, cover: data.imageUrl }));
         setImage(null);
+        setUploadSuccess(true);
       })
       .catch((error) => {
         console.error("Erreur téléchargement image :", error);
+        setUploadError(error.message);
       });
   };
 
@@ -101,19 +120,57 @@ function ItemDetails() {
   // Cette fonction envoie les nouvelles informations du vêtement au backend avec une requête PUT.
   // Après la mise à jour, elle actualise l'affichage et quitte le mode modification.
   const handleUpdateVetement = (itemToUpdate = updatedItem) => {
-    fetch(`http://localhost:3001/${idArticle}`, {
+    // On envoie le token : la route /items/:id est réservée aux admins
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:3001/items/${idArticle}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(itemToUpdate),
     })
       .then((response) => response.json())
-      .then((data) => {
-        setItemDetail(data);
-        setUpdatedItem(data);
+      .then(() => {
+        // La route renvoie un message, pas l'article : on garde nos valeurs locales
+        setItemDetail(itemToUpdate);
+        setUpdatedItem(itemToUpdate);
         setIsEditing(false);
       })
       .catch((error) => {
         console.error("Erreur lors de la requête PUT :", error);
+      });
+  };
+
+  // Cette fonction supprime l'article courant (réservé aux admins).
+  // Après confirmation, elle envoie la requête DELETE puis renvoie à l'accueil.
+  const handleDeleteVetement = () => {
+    const confirmation = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer cet article ? Cette action est irréversible.",
+    );
+    if (!confirmation) {
+      return;
+    }
+
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:3001/items/${idArticle}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Article supprimé.");
+          navigate.push("/"); // retour à la liste des articles
+        } else {
+          alert("Erreur lors de la suppression de l'article.");
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la requête DELETE :", error);
       });
   };
 
@@ -126,19 +183,29 @@ function ItemDetails() {
           <h2 className="article-id">id Article {idArticle}</h2>
           <h2 className="detail-name">{itemDetail.name}</h2>
 
-          <img
-            className="detail-image"
-            src={itemDetail.cover}
-            alt={`${itemDetail.name} cover`}
-          />
+          {itemDetail.cover && (
+            <img
+              className="detail-image"
+              src={itemDetail.cover}
+              alt={`${itemDetail.name} cover`}
+            />
+          )}
 
           <p className="detail-meta">Prix : {itemDetail.price} euros</p>
           <p className="detail-meta">Confort : {itemDetail.comfort}</p>
           <p className="detail-meta">Taille : {itemDetail.size}</p>
 
-          <button className="button-Add" onClick={() => setIsEditing(true)}>
-            Modifier
-          </button>
+          {/* Les boutons de gestion ne s'affichent que pour les admins */}
+          {role === "admin" && (
+            <div className="detail-actions">
+              <button className="button-Add" onClick={() => setIsEditing(true)}>
+                Modifier
+              </button>
+              <button className="button-Add" onClick={handleDeleteVetement}>
+                Supprimer
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="item-details-form">
@@ -172,7 +239,7 @@ function ItemDetails() {
             <button
               className="button-Add"
               type="button"
-              onClick={handleUpdateVetement}
+              onClick={() => handleUpdateVetement()}
             >
               Enregistrer
             </button>
@@ -185,6 +252,8 @@ function ItemDetails() {
               Annuler
             </button>
 
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+
             <button
               className="button-Add"
               type="button"
@@ -193,7 +262,14 @@ function ItemDetails() {
               Télécharger
             </button>
 
-            <input type="file" accept="image/*" onChange={handleImageChange} />
+            {uploadError && (
+              <p style={{ color: "red", marginTop: "8px" }}>{uploadError}</p>
+            )}
+            {uploadSuccess && (
+              <p style={{ color: "green", marginTop: "8px" }}>
+                Image mise à jour avec succès.
+              </p>
+            )}
           </div>
         </div>
       )}

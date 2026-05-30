@@ -171,3 +171,43 @@ button:active {
   box-shadow: none;
   transform: translateY(0);
 }
+
+/* Admin dark mode */
+.app-wrapper.dark-mode .admin-item {
+  background-color: #2a333b;
+  border-color: #5c6b7b;
+}
+
+.app-wrapper.dark-mode .admin-item__name {
+  color: #f2f5f8;
+}
+
+.app-wrapper.dark-mode .admin-item__description,
+.app-wrapper.dark-mode .admin-item__details {
+  color: #c4cdd5;
+}
+
+.app-wrapper.dark-mode .admin-modal__content {
+  background: #2a333b;
+  color: #f2f5f8;
+}
+
+.app-wrapper.dark-mode .admin-modal__title {
+  color: #f2f5f8;
+}
+
+.app-wrapper.dark-mode .admin-modal__label {
+  color: #c4cdd5;
+}
+
+.app-wrapper.dark-mode .admin-modal__input {
+  background-color: #1f252b;
+  border-color: #5c6b7b;
+  color: #f2f5f8;
+}
+
+.app-wrapper.dark-mode .admin-modal__file-label {
+  background: #1f252b;
+  border-color: #5c6b7b;
+  color: #c4cdd5;
+}

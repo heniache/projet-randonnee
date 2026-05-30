@@ -5,7 +5,7 @@ import "../styles/header.css";
 
 function Header({ cart = [] }) {
   const nombreArticles = cart.reduce((total, item) => total + item.amount, 0);
-
+  const role = localStorage.getItem("role");
   return (
     <div className="header-container">
       <div className="header-left">
@@ -16,6 +16,7 @@ function Header({ cart = [] }) {
       <nav className="header-right">
         <Link to="/">Accueil</Link>
         <Link to="/preferences">Préférences</Link>
+        {role === "admin" && <Link to="/admin/items">Gestion</Link>}
         <Link to="/login">Connexion</Link>
         <Link to="/profile" className="profile-link">
           Profile

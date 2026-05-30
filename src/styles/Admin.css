@@ -1,0 +1,39 @@
+.admin-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-header h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.admin-add-btn {
+  width: auto;
+  min-height: unset;
+  padding: 12px 24px;
+  font-size: 15px;
+}
+
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-empty {
+  text-align: center;
+  color: #888;
+  margin-top: 60px;
+  font-size: 16px;
+}

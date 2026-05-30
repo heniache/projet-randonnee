@@ -39,7 +39,7 @@ function LoginDetail() {
           body: JSON.stringify(
             isSignup
               ? { email, password, nom, prenom, telephone, adresse }
-              : { email, password }
+              : { email, password },
           ),
         });
 
@@ -62,6 +62,7 @@ function LoginDetail() {
         } else {
           localStorage.setItem("token", data.token);
           localStorage.setItem("userId", data.userId);
+          localStorage.setItem("role", data.role);
           navigate.push("/profile");
         }
       }

@@ -83,6 +83,7 @@ function ProfileDetail() {
         // On vide le stockage local puisque le compte n'existe plus
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
+        localStorage.removeItem("role");
         alert("Votre compte a été supprimé.");
         navigate.push("/login");
       } else {
