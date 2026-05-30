@@ -15,6 +15,7 @@ function Header({ cart = [] }) {
 
       <nav className="header-right">
         <Link to="/">Accueil</Link>
+        <Link to="/prestations">Prestations</Link>
         <Link to="/preferences">Préférences</Link>
         {role === "admin" && <Link to="/admin/items">Gestion</Link>}
         <Link to="/login">Connexion</Link>

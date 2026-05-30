@@ -109,7 +109,7 @@ function ShoppingList({ cart, updateCart }) {
 
   return (
     <div>
-      <div className="search-container">
+      <div className="search-bar-wrapper">
         <div className="search-box">
           <SearchIcon className="search-icon" />
 
@@ -121,8 +121,9 @@ function ShoppingList({ cart, updateCart }) {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
+      </div>
 
-        <div className="filter-container">
+      <div className="filter-container">
           <select
             className="filter-select"
             value={saleFilter}
@@ -160,7 +161,6 @@ function ShoppingList({ cart, updateCart }) {
             Réinitialiser
           </button>
         </div>
-      </div>
 
       {filteredItems.length === 0 ? (
         <p className="no-result">Aucun article trouvé.</p>

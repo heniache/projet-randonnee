@@ -1,0 +1,157 @@
+.prestationDetails-page {
+  --prestation-detail-width: min(90vw, 520px);
+  padding: 24px 16px 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.prestation-detail-heading {
+  width: var(--prestation-detail-width);
+  margin: 0;
+  text-align: center;
+
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  background-color: #117380;
+  color: white;
+
+  border-radius: 14px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.prestation-details-content {
+  width: var(--prestation-detail-width);
+  margin: 0 auto;
+  padding: 18px;
+
+  border: 1px solid #d0d7de;
+  border-radius: 16px;
+  background-color: #ffffff;
+
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+  box-sizing: border-box;
+}
+
+.prestation-detail-name {
+  margin: 0;
+  text-align: center;
+  color: #117380;
+}
+
+.prestation-detail-image {
+  display: block;
+  width: 100%;
+  height: 240px;
+
+  margin: 14px auto;
+  border: 1px solid #c9d4df;
+  border-radius: 14px;
+
+  object-fit: cover;
+}
+
+.prestation-detail-description {
+  margin: 14px 0;
+  line-height: 1.5;
+  text-align: center;
+  color: #4b5563;
+}
+
+.prestation-detail-meta {
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.prestation-detail-price {
+  margin: 12px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #117380;
+}
+
+.prestation-detail-actions {
+  margin-top: 16px;
+
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.prestation-detail-actions .button-Add {
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: cadetblue;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.prestation-detail-actions .button-Add:hover {
+  background-color: #4a8fa8;
+}
+
+.prestation-loading {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+/* Dark mode */
+.dark-mode .prestationDetails-page {
+  background-color: #1f252b;
+  color: #f2f5f8;
+}
+
+.dark-mode .prestation-detail-heading {
+  background-color: #0d5b66;
+}
+
+.dark-mode .prestation-details-content {
+  background-color: #2a333b;
+  border-color: #485564;
+  box-shadow: none;
+}
+
+.dark-mode .prestation-detail-name {
+  color: cadetblue;
+}
+
+.dark-mode .prestation-detail-description {
+  color: #c6d0db;
+}
+
+.dark-mode .prestation-detail-price {
+  color: cadetblue;
+}
+
+.dark-mode .prestation-detail-actions .button-Add {
+  background-color: #3d7a8a;
+  color: #fff;
+  border: none;
+}
+
+.dark-mode .prestation-detail-actions .button-Add:hover {
+  background-color: #4a8fa8;
+}
+
+@media screen and (max-width: 480px) {
+  .prestation-details-content {
+    padding: 14px;
+  }
+
+  .prestation-detail-image {
+    height: 190px;
+  }
+
+  .prestation-detail-actions .button-Add {
+    width: 100%;
+  }
+}

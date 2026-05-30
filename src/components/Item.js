@@ -1,24 +1,16 @@
 import "../styles/Item.css";
 function Item(props) {
-  const idValue = props.id;
-  const coverValue = props.cover;
-  const nameValue = props.name;
-  const sizeValue = props.size;
-  const comfortValue = props.comfort;
-  const prix = props.price;
   return (
-    <div>
-      <a href={`/detail/${idValue}`}>
-        <img className="item-cover" src={coverValue} alt={nameValue} />
-        <br />
+    <div className="item-content">
+      <a href={`/detail/${props.id}`} className="item-image-link">
+        <img className="item-cover" src={props.cover} alt={props.name} />
       </a>
-      {nameValue}
-      <br />
-      Taille : {sizeValue}
-      <br />
-      Confort : {comfortValue}
-      <br />
-      Prix : {prix}
+      <div className="item-info">
+        <p className="item-name">{props.name}</p>
+        <p className="item-meta">Taille : {props.size}</p>
+        <p className="item-meta">Confort : {props.comfort}</p>
+        <p className="item-price">{props.price} €</p>
+      </div>
     </div>
   );
 }

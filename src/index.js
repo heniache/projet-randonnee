@@ -15,6 +15,8 @@ import Footer from "./components/Footer";
 import { PreferencesContext } from "./context";
 import Cart from "./components/Cart";
 import Admin from "./pages/Admin";
+import Prestations from "./pages/Prestations";
+import PrestationDetails from "./pages/PrestationDetails";
 
 function AppLayout() {
   const { darkMode } = useContext(PreferencesContext);
@@ -28,6 +30,13 @@ function AppLayout() {
           <Switch>
             <Route exact path="/">
               <Home cart={cart} updateCart={updateCart} />
+            </Route>
+            <Route exact path="/prestations">
+              <Prestations />
+            </Route>
+
+            <Route path="/prestations/:idPrestation">
+              <PrestationDetails />
             </Route>
             <Route path="/detail/:idArticle">
               <Detail />
@@ -49,6 +58,7 @@ function AppLayout() {
             <Route path="/admin/items">
               <Admin />
             </Route>
+
             <Route path="*">
               <Error />
             </Route>
