@@ -7,6 +7,7 @@ function PrestationDetails() {
   const history = useHistory();
 
   const [prestation, setPrestation] = useState(null);
+  const [showReservationForm, setShowReservationForm] = useState(false);
 
   useEffect(() => {
     fetch(`http://localhost:3001/prestations/${idPrestation}`)
@@ -23,6 +24,55 @@ function PrestationDetails() {
     return <p className="prestation-loading">Chargement...</p>;
   }
 
+  function handleReservationOnClick() {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    if (!token || !userId) {
+      alert("Vous devez être connecté pour réserver une prestation.");
+      history.push("/login");
+      return;
+    }
+    setShowReservationForm(true);
+  }
+
+  function handleReservationSubmit(e) {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    console.log("Données de réservation :", {
+      userId,
+      idPrestation,
+    });
+    const formData = new FormData(e.target);
+    const reservationData = {
+      prestationId: idPrestation,
+      date_reservation: formData.get("date_reservation"),
+      nombre_personnes: formData.get("nombre_personnes"),
+      mode_paiement: formData.get("mode_paiement"),
+      message: formData.get("message"),
+    };
+
+    fetch("http://localhost:3001/reservations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(reservationData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Réservation confirmée !");
+          history.push("/prestations");
+        } else {
+          alert("Erreur lors de la réservation.");
+        }
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la requête de réservation :", error);
+        alert("Erreur réseau lors de la réservation.");
+      });
+  }
   return (
     <div className="prestationDetails-page">
       <h1 className="prestation-detail-heading">Détail de la prestation</h1>
@@ -54,7 +104,66 @@ function PrestationDetails() {
             Retour
           </button>
 
-          <button className="button-Add">Réserver</button>
+          <button className="button-Add" onClick={handleReservationOnClick}>
+            Réserver
+          </button>
+          {showReservationForm && (
+            <form
+              className="reservation-form"
+              onSubmit={handleReservationSubmit}
+            >
+              <h3>Formulaire de réservation</h3>
+
+              <label className="detail-label" htmlFor="date_reservation">
+                Date souhaitée :
+              </label>
+              <input
+                id="date_reservation"
+                className="detail-input"
+                type="date"
+                name="date_reservation"
+              />
+
+              <label className="detail-label" htmlFor="nombre_personnes">
+                Nombre de personnes :
+              </label>
+              <input
+                id="nombre_personnes"
+                className="detail-input"
+                type="number"
+                name="nombre_personnes"
+                min="1"
+              />
+
+              <label className="detail-label" htmlFor="mode_paiement">
+                Mode de paiement :
+              </label>
+              <select
+                id="mode_paiement"
+                className="detail-input"
+                name="mode_paiement"
+              >
+                <option value="Carte bancaire">Carte bancaire</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Virement bancaire">Virement bancaire</option>
+                <option value="Paiement sur place">Paiement sur place</option>
+              </select>
+
+              <label className="detail-label" htmlFor="message">
+                Message :
+              </label>
+              <textarea
+                id="message"
+                className="detail-input"
+                name="message"
+                placeholder="Ajoutez une information si besoin..."
+              />
+
+              <button className="button-Add" type="submit">
+                Confirmer la réservation
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </div>

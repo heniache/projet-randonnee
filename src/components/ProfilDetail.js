@@ -59,6 +59,7 @@ function ProfileDetail() {
     // Supprimer le token JWT du stockage local lors de la déconnexion
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("role");
     // Redirige l'utilisateur vers la page de connexion après la déconnexion
     navigate.push("/login");
   };

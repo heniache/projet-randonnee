@@ -54,3 +54,18 @@
   box-shadow: none;
   opacity: 1;
 }
+
+.prestation-title-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dark-mode .MuiCheckbox-root {
+  color: #c6d0db;
+}
+
+.dark-mode .MuiCheckbox-root.Mui-checked {
+  color: #ff6b6b;
+}

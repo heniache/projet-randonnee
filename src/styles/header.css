@@ -45,6 +45,34 @@
   opacity: 0.7;
 }
 
+/* Style de la select box admin dans le header */
+.admin-select {
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 4px 8px;
+  outline: none;
+  cursor: pointer;
+  transition:
+    opacity 0.3s,
+    border-color 0.3s;
+  font-family: inherit;
+}
+
+.admin-select:hover {
+  border-color: rgb(0, 0, 0);
+  opacity: 0.8;
+}
+
+.admin-select option {
+  background-color: white;
+  color: black;
+  font-weight: normal;
+}
+
 .header-container {
   position: relative;
 }
@@ -193,8 +221,15 @@
   font-size: 12px;
   font-weight: bold;
 }
+.dark-mode .admin-select {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
 
-/* Show burger, hide desktop nav on mobile */
+.dark-mode .admin-select option {
+  background-color: #2d2d2d;
+  color: white;
+}
 @media (max-width: 768px) {
   .burger-btn {
     display: flex;

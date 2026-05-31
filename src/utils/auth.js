@@ -4,3 +4,7 @@ export const isAuthenticated = () => {
 
   return Boolean(token && userId);
 };
+
+export const isAdmin = () => {
+  return isAuthenticated() && localStorage.getItem("role") === "admin";
+};

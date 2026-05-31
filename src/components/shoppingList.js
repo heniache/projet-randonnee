@@ -3,6 +3,7 @@ import "../styles/ShoppingList.css";
 import SearchIcon from "@mui/icons-material/Search";
 import Pagination from "@mui/material/Pagination";
 import Item from "./Item";
+import FavoritBouton from "./FavoritBouton";
 import { PreferencesContext } from "../context";
 
 // Ce composant affiche la liste des vêtements.
@@ -170,6 +171,10 @@ function ShoppingList({ cart, updateCart }) {
             {paginatedItems.map((item) => (
               <li className="item" key={item.id}>
                 {item.onSale === 1 && <div className="sales">Soldes</div>}
+
+                <div className="item-favorite-btn">
+                  <FavoritBouton type="item" itemId={item.id} />
+                </div>
 
                 <Item
                   id={item.id}

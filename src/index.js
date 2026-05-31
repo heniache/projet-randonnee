@@ -9,14 +9,21 @@ import Preferences from "./pages/Preferences";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import { PreferencesProvider } from "./context";
+import { PreferencesProvider, LoadingProvider } from "./context";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { PreferencesContext } from "./context";
+import LoadingOverlay from "./components/LoadingOverlay";
 import Cart from "./components/Cart";
 import Admin from "./pages/Admin";
 import Prestations from "./pages/Prestations";
 import PrestationDetails from "./pages/PrestationDetails";
+import MesReservations from "./pages/mes-reservations";
+import AdminReservations from "./pages/AdminReservations";
+import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
+import AdminPrestations from "./pages/AdminPrestations";
+import Favoris from "./pages/Favoris";
 
 function AppLayout() {
   const { darkMode } = useContext(PreferencesContext);
@@ -35,6 +42,14 @@ function AppLayout() {
               <Prestations />
             </Route>
 
+            <PrivateRoute path="/mes-reservations">
+              <MesReservations />
+            </PrivateRoute>
+
+            <PrivateRoute path="/favoris">
+              <Favoris />
+            </PrivateRoute>
+
             <Route path="/prestations/:idPrestation">
               <PrestationDetails />
             </Route>
@@ -48,23 +63,29 @@ function AppLayout() {
               <Login />
             </Route>
 
-            <Route path="/profile">
+            <PrivateRoute path="/profile">
               <Profile />
-            </Route>
+            </PrivateRoute>
 
             <Route path="/cart">
               <Cart cart={cart} updateCart={updateCart} />
             </Route>
-            <Route path="/admin/items">
+            <AdminRoute path="/admin/items">
               <Admin />
-            </Route>
-
+            </AdminRoute>
+            <AdminRoute path="/adminReservation">
+              <AdminReservations />
+            </AdminRoute>
+            <AdminRoute path="/admin/prestations">
+              <AdminPrestations />
+            </AdminRoute>
             <Route path="*">
               <Error />
             </Route>
           </Switch>
         </div>
         <Footer />
+        <LoadingOverlay />
       </div>
     </Router>
   );
@@ -73,8 +94,10 @@ function AppLayout() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <PreferencesProvider>
-      <AppLayout />
-    </PreferencesProvider>
+    <LoadingProvider>
+      <PreferencesProvider>
+        <AppLayout />
+      </PreferencesProvider>
+    </LoadingProvider>
   </React.StrictMode>,
 );

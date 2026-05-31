@@ -1,0 +1,187 @@
+.favoris-page {
+  --favoris-content-width: min(92vw, 850px);
+
+  padding: 24px 16px 40px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.favoris-heading {
+  width: var(--favoris-content-width);
+  margin: 0;
+
+  text-align: center;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+
+  background-color: #117380;
+  color: white;
+
+  border-radius: 14px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.favoris-section {
+  width: var(--favoris-content-width);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.favoris-list {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.favori-card {
+  display: flex;
+  gap: 18px;
+
+  padding: 16px;
+
+  border: 1px solid #d0d7de;
+  border-radius: 16px;
+
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+
+  box-sizing: border-box;
+}
+
+.favori-image {
+  width: 170px;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+  border: 1px solid #c9d4df;
+}
+
+.favori-info {
+  flex: 1;
+}
+
+.favori-title-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.favori-title-line h2 {
+  margin: 0 0 8px;
+  color: #117380;
+}
+
+.favori-heart {
+  color: #d32f2f;
+  font-size: 24px;
+}
+
+.favori-description {
+  margin: 8px 0;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+.favori-info p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.favori-price {
+  font-weight: bold;
+  color: #117380;
+}
+
+.favori-actions {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-favori-icon {
+  color: #777;
+  font-size: 22px;
+}
+
+.delete-favori-icon:hover {
+  color: #d32f2f;
+}
+
+.no-favoris,
+.favoris-loading {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+/* Dark mode */
+.dark-mode .favoris-page {
+  background-color: #1f252b;
+  color: #f2f5f8;
+}
+
+.dark-mode .favoris-heading {
+  background-color: #0d5b66;
+}
+
+.dark-mode .favoris-section-title {
+  color: white;
+  border-left-color: cadetblue;
+}
+
+.dark-mode .favori-card {
+  background-color: #2a333b;
+  border-color: #485564;
+  box-shadow: none;
+}
+
+.dark-mode .favori-title-line h2 {
+  color: cadetblue;
+}
+
+.dark-mode .favori-description {
+  color: #c6d0db;
+}
+
+.dark-mode .favori-price {
+  color: cadetblue;
+}
+
+.dark-mode .delete-favori-icon {
+  color: #c6d0db;
+}
+
+.dark-mode .delete-favori-icon:hover {
+  color: #ff6b6b;
+}
+
+.dark-mode .no-favoris,
+.dark-mode .favoris-loading {
+  color: white;
+}
+
+/* Responsive */
+@media screen and (max-width: 650px) {
+  .favori-card {
+    flex-direction: column;
+  }
+
+  .favori-image {
+    width: 100%;
+    height: 190px;
+  }
+
+  .favori-actions {
+    justify-content: space-between;
+  }
+}
