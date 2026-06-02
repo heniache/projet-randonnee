@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import "../styles/PrestationDetails.css";
+import Avis from "../components/Avis";
+import AgendaSelector from "../components/AgendaSelector";
 
 function PrestationDetails() {
   const { idPrestation } = useParams();
@@ -8,16 +10,16 @@ function PrestationDetails() {
 
   const [prestation, setPrestation] = useState(null);
   const [showReservationForm, setShowReservationForm] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedSlot, setSelectedSlot] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:3001/prestations/${idPrestation}`)
       .then((response) => response.json())
-      .then((data) => {
-        setPrestation(data);
-      })
-      .catch((error) => {
-        console.error("Erreur récupération détail prestation :", error);
-      });
+      .then((data) => setPrestation(data))
+      .catch((error) =>
+        console.error("Erreur récupération détail prestation :", error)
+      );
   }, [idPrestation]);
 
   if (!prestation) {
@@ -38,15 +40,17 @@ function PrestationDetails() {
   function handleReservationSubmit(e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
-    console.log("Données de réservation :", {
-      userId,
-      idPrestation,
-    });
+
+    if (!selectedSlot) {
+      alert("Veuillez sélectionner un créneau horaire.");
+      return;
+    }
+
     const formData = new FormData(e.target);
     const reservationData = {
       prestationId: idPrestation,
-      date_reservation: formData.get("date_reservation"),
+      date_reservation: selectedDate,
+      creneau_horaire: selectedSlot,
       nombre_personnes: formData.get("nombre_personnes"),
       mode_paiement: formData.get("mode_paiement"),
       message: formData.get("message"),
@@ -73,6 +77,9 @@ function PrestationDetails() {
         alert("Erreur réseau lors de la réservation.");
       });
   }
+
+  const today = new Date().toISOString().split("T")[0];
+
   return (
     <div className="prestationDetails-page">
       <h1 className="prestation-detail-heading">Détail de la prestation</h1>
@@ -86,15 +93,12 @@ function PrestationDetails() {
           alt={prestation.title}
         />
 
-        <p className="prestation-detail-description">
-          {prestation.description}
-        </p>
-
+        <p className="prestation-detail-description">{prestation.description}</p>
         <p className="prestation-detail-meta">Durée : {prestation.duree}</p>
-
         <p className="prestation-detail-meta">Niveau : {prestation.niveau}</p>
-
         <p className="prestation-detail-price">Prix : {prestation.prix}€</p>
+
+        <Avis type="prestation" targetId={idPrestation} />
 
         <div className="prestation-detail-actions">
           <button
@@ -107,11 +111,9 @@ function PrestationDetails() {
           <button className="button-Add" onClick={handleReservationOnClick}>
             Réserver
           </button>
+
           {showReservationForm && (
-            <form
-              className="reservation-form"
-              onSubmit={handleReservationSubmit}
-            >
+            <form className="reservation-form" onSubmit={handleReservationSubmit}>
               <h3>Formulaire de réservation</h3>
 
               <label className="detail-label" htmlFor="date_reservation">
@@ -122,7 +124,27 @@ function PrestationDetails() {
                 className="detail-input"
                 type="date"
                 name="date_reservation"
+                min={today}
+                value={selectedDate}
+                onChange={(e) => {
+                  setSelectedDate(e.target.value);
+                  setSelectedSlot("");
+                }}
+                required
               />
+
+              <label className="detail-label">Créneau horaire :</label>
+              <AgendaSelector
+                prestationId={idPrestation}
+                selectedDate={selectedDate}
+                selectedSlot={selectedSlot}
+                onSelect={setSelectedSlot}
+              />
+              {selectedSlot && (
+                <p className="selected-slot-info">
+                  Créneau sélectionné : <strong>{selectedSlot}</strong>
+                </p>
+              )}
 
               <label className="detail-label" htmlFor="nombre_personnes">
                 Nombre de personnes :
@@ -133,6 +155,7 @@ function PrestationDetails() {
                 type="number"
                 name="nombre_personnes"
                 min="1"
+                required
               />
 
               <label className="detail-label" htmlFor="mode_paiement">

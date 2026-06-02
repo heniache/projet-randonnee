@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PrestationItem from "./PrestationItem";
+import SearchIcon from "@mui/icons-material/Search";
 import "../styles/PrestationsList.css";
 
 const CARD_WIDTH = 270; // 250px card + 20px gap
@@ -62,13 +63,16 @@ function PrestationsList() {
   return (
     <div className="prestations-section">
       <div className="prestation-filters">
-        <input
-          className="prestation-search"
-          type="text"
-          placeholder="Rechercher une prestation..."
-          value={recherche}
-          onChange={(e) => setRecherche(e.target.value)}
-        />
+        <div className="prestation-search-box">
+          <SearchIcon className="prestation-search-icon" />
+          <input
+            className="prestation-search"
+            type="text"
+            placeholder="Rechercher une prestation..."
+            value={recherche}
+            onChange={(e) => setRecherche(e.target.value)}
+          />
+        </div>
 
         <select
           className="prestation-select"

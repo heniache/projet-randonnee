@@ -9,7 +9,7 @@ import Preferences from "./pages/Preferences";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import { PreferencesProvider, LoadingProvider } from "./context";
+import { PreferencesProvider, LoadingProvider, AuthProvider } from "./context";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { PreferencesContext } from "./context";
@@ -24,6 +24,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
 import AdminPrestations from "./pages/AdminPrestations";
 import Favoris from "./pages/Favoris";
+import MesAvis from "./pages/MesAvis";
 
 function AppLayout() {
   const { darkMode } = useContext(PreferencesContext);
@@ -48,6 +49,10 @@ function AppLayout() {
 
             <PrivateRoute path="/favoris">
               <Favoris />
+            </PrivateRoute>
+
+            <PrivateRoute path="/mes-avis">
+              <MesAvis />
             </PrivateRoute>
 
             <Route path="/prestations/:idPrestation">
@@ -96,7 +101,9 @@ root.render(
   <React.StrictMode>
     <LoadingProvider>
       <PreferencesProvider>
-        <AppLayout />
+        <AuthProvider>
+          <AppLayout />
+        </AuthProvider>
       </PreferencesProvider>
     </LoadingProvider>
   </React.StrictMode>,

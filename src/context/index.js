@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 
 export const PreferencesContext = createContext();
 
@@ -33,3 +33,38 @@ export const LoadingProvider = ({ children }) => {
     </LoadingContext.Provider>
   );
 };
+
+// ─── Auth ───────────────────────────────────────────────────────────────────
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => ({
+    isAuthenticated: Boolean(
+      localStorage.getItem("token") && localStorage.getItem("userId")
+    ),
+    role: localStorage.getItem("role") || null,
+  }));
+
+  const login = (token, userId, role) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
+    localStorage.setItem("role", role);
+    setUser({ isAuthenticated: true, role });
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("role");
+    setUser({ isAuthenticated: false, role: null });
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => useContext(AuthContext);

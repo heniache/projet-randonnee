@@ -1,13 +1,15 @@
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "../styles/Login.css";
 
 function ProfileDetail() {
-  // vous pouvez récupérer l'ID de l'utilisateur à partir du stockage local;
   const userId = localStorage.getItem("userId");
   const navigate = useHistory();
   const [isEditing, setIsEditing] = useState(false);
   const [editFormData, setFormData] = useState({});
   const [user, setUser] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteInput, setDeleteInput] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -17,18 +19,14 @@ function ProfileDetail() {
           setUser(data);
           setFormData(data);
         })
-        .catch((error) => {
-          console.error("Erreur lors de la récupération des données :", error);
-        });
+        .catch((error) =>
+          console.error("Erreur lors de la récupération des données :", error)
+        );
     }
   }, [userId]);
 
-  // Gère la frappe dans les champs de texte
   const handleChange = (e) => {
-    setFormData({
-      ...editFormData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...editFormData, [e.target.name]: e.target.value });
   };
 
   const handleSave = async () => {
@@ -37,16 +35,14 @@ function ProfileDetail() {
         `http://localhost:3001/utilisateur/${userId}`,
         {
           method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(editFormData),
-        },
+        }
       );
 
       if (response.ok) {
-        setUser(editFormData); // On met à jour l'affichage
-        setIsEditing(false); // On quitte le mode édition
+        setUser(editFormData);
+        setIsEditing(false);
         alert("Profil mis à jour avec succès !");
       } else {
         alert("Erreur lors de la mise à jour.");
@@ -55,33 +51,28 @@ function ProfileDetail() {
       console.error("Erreur réseau :", error);
     }
   };
+
   const handleLogout = () => {
-    // Supprimer le token JWT du stockage local lors de la déconnexion
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("role");
-    // Redirige l'utilisateur vers la page de connexion après la déconnexion
     navigate.push("/login");
   };
-  const handleDelete = async () => {
-    // Demande de confirmation : la suppression est définitive
-    const confirmation = window.confirm(
-      "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
-    );
-    if (!confirmation) {
-      return;
-    }
+
+  const handleDeleteConfirm = async () => {
+    if (deleteInput !== "SUPPRIMER") return;
 
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/utilisateur/${userId}`,
         {
           method: "DELETE",
-        },
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
 
       if (response.ok) {
-        // On vide le stockage local puisque le compte n'existe plus
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
         localStorage.removeItem("role");
@@ -219,20 +210,66 @@ function ProfileDetail() {
             Modifier
           </button>
         )}
-        <button
-          onClick={handleDelete}
-          className="main-button profile-delete-button"
-        >
-          Supprimer mon compte
-        </button>
+
         <button
           onClick={handleLogout}
           className="main-button profile-logout-button"
         >
           Déconnexion
         </button>
+
+        {!showDeleteConfirm ? (
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            className="main-button profile-delete-button"
+          >
+            Supprimer mon compte
+          </button>
+        ) : (
+          <div className="delete-confirm-box">
+            <h3 className="delete-confirm-title">Suppression du compte</h3>
+            <p className="delete-confirm-warning">
+              Cette action est <strong>irréversible</strong>. Les données suivantes seront définitivement supprimées :
+            </p>
+            <ul className="delete-confirm-list">
+              <li>Votre profil et informations personnelles</li>
+              <li>Toutes vos réservations</li>
+              <li>Tous vos favoris</li>
+              <li>Tous vos avis</li>
+            </ul>
+            <p className="delete-confirm-instruction">
+              Tapez <strong>SUPPRIMER</strong> pour confirmer :
+            </p>
+            <input
+              className="delete-confirm-input"
+              type="text"
+              value={deleteInput}
+              onChange={(e) => setDeleteInput(e.target.value)}
+              placeholder="SUPPRIMER"
+            />
+            <div className="delete-confirm-actions">
+              <button
+                className="main-button profile-delete-button"
+                onClick={handleDeleteConfirm}
+                disabled={deleteInput !== "SUPPRIMER"}
+              >
+                Confirmer la suppression
+              </button>
+              <button
+                className="switch-button"
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  setDeleteInput("");
+                }}
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
 export default ProfileDetail;

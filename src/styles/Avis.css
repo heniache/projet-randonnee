@@ -1,0 +1,182 @@
+.avis {
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.avis h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avis-empty {
+  text-align: center;
+  color: #888;
+}
+
+/* ── Carousel ── */
+.avis-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avis-card {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  box-sizing: border-box;
+}
+
+.avis-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avis-card h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #1a202c;
+}
+
+.avis-date {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.avis-commentaire {
+  margin: 0;
+  line-height: 1.6;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+/* ── Navigation ── */
+.avis-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.avis-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.avis-btn:hover {
+  border-color: #117380;
+  background: #f0fafa;
+}
+
+
+.avis-counter {
+  font-size: 13px;
+  color: #64748b;
+  min-width: 40px;
+  text-align: center;
+}
+
+.avis-deja {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* ── Form ── */
+.avis-form {
+  max-width: 100%;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: #f8fafc;
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+.avis-form h3 {
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+.avis-form textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.avis-form button {
+  padding: 11px;
+  background-color: #117380;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.avis-form button:hover {
+  background-color: #0d5b66;
+}
+
+/* ── Dark mode ── */
+.dark-mode .avis-card {
+  background-color: #2a333b;
+  border-color: #3d4e5e;
+  box-shadow: none;
+}
+
+.dark-mode .avis-card h3 {
+  color: #f2f5f8;
+}
+
+.dark-mode .avis-commentaire {
+  color: #c6d0db;
+}
+
+.dark-mode .avis-btn {
+  border-color: #3d4e5e;
+}
+
+.dark-mode .avis-btn:hover {
+  border-color: cadetblue;
+  background: rgba(95, 158, 160, 0.1);
+}
+
+
+.dark-mode .avis-form {
+  background-color: #232b33;
+  border-color: #3d4e5e;
+}
+
+.dark-mode .avis-form textarea {
+  background-color: #2a333b;
+  border-color: #3d4e5e;
+  color: #f2f5f8;
+}

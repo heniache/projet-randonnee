@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useAuth } from "../context";
 function LoginDetail() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,6 +10,7 @@ function LoginDetail() {
   const [adresse, setAdresse] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const { login } = useAuth();
   const navigate = useHistory();
   useEffect(() => {
     // Vérifiez si un token est déjà stocké localement
@@ -60,9 +62,7 @@ function LoginDetail() {
             "Compte créé avec succès. Vous pouvez maintenant vous connecter.",
           );
         } else {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userId", data.userId);
-          localStorage.setItem("role", data.role);
+          login(data.token, data.userId, data.role);
           navigate.push("/profile");
         }
       }

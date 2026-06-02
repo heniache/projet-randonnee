@@ -1,0 +1,191 @@
+.mes-avis-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.mes-avis-heading {
+  text-align: center;
+  background-color: #117380;
+  color: #fff;
+  border-radius: 14px;
+  padding: 12px 20px;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin-bottom: 28px;
+}
+
+.mes-avis-loading,
+.mes-avis-empty {
+  text-align: center;
+  color: #64748b;
+  margin-top: 40px;
+}
+
+/* ── Liste ── */
+.mes-avis-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ── Carte ── */
+.mes-avis-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mes-avis-card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mes-avis-cover {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+}
+
+.mes-avis-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mes-avis-prestation {
+  margin: 0;
+  font-size: 16px;
+  color: #117380;
+}
+
+.mes-avis-date {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mes-avis-commentaire {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+/* ── Boutons d'action ── */
+.mes-avis-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-modifier,
+.btn-supprimer,
+.btn-valider,
+.btn-annuler {
+  padding: 7px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-modifier,
+.btn-valider {
+  background-color: cadetblue;
+  color: #fff;
+}
+
+.btn-modifier:hover,
+.btn-valider:hover {
+  background-color: #4a8fa8;
+}
+
+.btn-supprimer {
+  background-color: #e53e3e;
+  color: #fff;
+}
+
+.btn-supprimer:hover {
+  background-color: #c53030;
+}
+
+.btn-annuler {
+  background-color: #e2e8f0;
+  color: #475569;
+}
+
+.btn-annuler:hover {
+  background-color: #cbd5e1;
+}
+
+/* ── Formulaire édition inline ── */
+.mes-avis-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mes-avis-edit-form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.mes-avis-edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ── Dark mode ── */
+.dark-mode .mes-avis-heading {
+  background-color: #0d5b66;
+}
+
+.dark-mode .mes-avis-card {
+  background-color: #2a333b;
+  border-color: #3d4e5e;
+  box-shadow: none;
+}
+
+.dark-mode .mes-avis-prestation {
+  color: cadetblue;
+}
+
+.dark-mode .mes-avis-commentaire {
+  color: #c6d0db;
+}
+
+.dark-mode .mes-avis-cover {
+  border-color: #3d4e5e;
+}
+
+.dark-mode .mes-avis-edit-form textarea {
+  background-color: #1e272f;
+  border-color: #3d4e5e;
+  color: #f2f5f8;
+}
+
+.dark-mode .btn-annuler {
+  background-color: #3d4e5e;
+  color: #c6d0db;
+}
+
+.dark-mode .btn-annuler:hover {
+  background-color: #485564;
+}

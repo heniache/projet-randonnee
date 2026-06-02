@@ -16,23 +16,39 @@
   justify-content: center;
 }
 
-.prestation-search {
-  padding: 9px 16px;
+.prestation-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 260px;
   border: 1.5px solid #d0d0d0;
   border-radius: 28px;
-  font-size: 14px;
-  outline: none;
-  width: 260px;
+  padding: 0 14px;
   background-color: #fff;
-  color: #333;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
 }
 
-.prestation-search:focus {
+.prestation-search-box:focus-within {
   border-color: cadetblue;
   box-shadow: 0 2px 10px rgba(95, 158, 160, 0.2);
+}
+
+.prestation-search-icon {
+  color: cadetblue;
+  font-size: 20px !important;
+  flex-shrink: 0;
+}
+
+.prestation-search {
+  padding: 9px 0;
+  border: none;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  background-color: transparent;
+  color: #333;
 }
 
 .prestation-search::placeholder {
@@ -228,18 +244,18 @@
 }
 
 /* ── Dark mode ── */
-.dark-mode .prestation-search {
+.dark-mode .prestation-search-box {
   background-color: #2a333b;
   border-color: #3d4e5c;
+}
+
+.dark-mode .prestation-search {
+  background-color: transparent;
   color: #f2f5f8;
 }
 
 .dark-mode .prestation-search::placeholder {
   color: #7a8a96;
-}
-
-.dark-mode .prestation-search:focus {
-  border-color: cadetblue;
 }
 
 .dark-mode .prestation-select {
@@ -344,4 +360,39 @@
 .dark-mode .prestation-reset:hover {
   border-color: #7a99aa;
   color: #f2f5f8;
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 768px) {
+  .carousel-wrapper {
+    flex-direction: column;
+  }
+
+  .prestation-card {
+    width: 220px;
+  }
+
+  .prestation-search-box {
+    width: 100%;
+  }
+
+  /* Make arrows overlap or position better for mobile? Actually just hide or inline them nicely if flex-column */
+  .carousel-wrapper {
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .prestation-search-box {
+    width: 100%;
+  }
+
+  .prestation-filters {
+    gap: 8px;
+  }
+
+  .prestation-card {
+    width: 180px;
+  }
 }

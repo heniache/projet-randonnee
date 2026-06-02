@@ -66,6 +66,9 @@ function MesReservations() {
                     "fr-FR",
                   )}
                 </p>
+                {reservation.creneau_horaire && (
+                  <p>Créneau : {reservation.creneau_horaire}</p>
+                )}
                 <p>Personnes : {reservation.nombre_personnes}</p>
                 <p>Paiement : {reservation.mode_paiement}</p>
                 <p>Statut : {reservation.statut}</p>

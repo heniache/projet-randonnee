@@ -2,6 +2,7 @@ import "../styles/ItemDetails.css";
 import { useParams, useHistory } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { PreferencesContext } from "../context";
+import Avis from "../components/Avis";
 
 // Ce composant affiche le détail d'un vêtement.
 // Il permet aussi de modifier ses informations et de télécharger une nouvelle image.
@@ -194,6 +195,8 @@ function ItemDetails() {
           <p className="detail-meta">Prix : {itemDetail.price} euros</p>
           <p className="detail-meta">Confort : {itemDetail.comfort}</p>
           <p className="detail-meta">Taille : {itemDetail.size}</p>
+
+          <Avis type="item" targetId={idArticle} />
 
           {/* Les boutons de gestion ne s'affichent que pour les admins */}
           {role === "admin" && (

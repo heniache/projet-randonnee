@@ -142,6 +142,85 @@
   background-color: #4a8fa8;
 }
 
+.reservation-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e7ef;
+}
+
+.reservation-form h3 {
+  text-align: center;
+  color: #117380;
+  margin: 0 0 10px;
+}
+
+.detail-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  margin-top: 8px;
+}
+
+.detail-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #cdd5df;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.detail-input:focus {
+  border-color: #117380;
+  box-shadow: 0 0 0 3px rgba(17, 115, 128, 0.1);
+}
+
+.selected-slot-info {
+  font-size: 14px;
+  color: #117380;
+  background: #eef7f8;
+  border: 1px solid #b2d8dc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 4px 0;
+}
+
+/* Dark mode reservation form */
+.dark-mode .reservation-form {
+  border-top-color: #3a4550;
+}
+
+.dark-mode .reservation-form h3 {
+  color: cadetblue;
+}
+
+.dark-mode .detail-label {
+  color: #c6d0db;
+}
+
+.dark-mode .detail-input {
+  background: #1e2428;
+  border-color: #485564;
+  color: #f2f5f8;
+}
+
+.dark-mode .detail-input:focus {
+  border-color: cadetblue;
+}
+
+.dark-mode .selected-slot-info {
+  background: #1e3035;
+  border-color: #3d7a8a;
+  color: cadetblue;
+}
+
 @media screen and (max-width: 480px) {
   .prestation-details-content {
     padding: 14px;

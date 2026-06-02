@@ -300,3 +300,24 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 600px) {
+  .cart-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cart-item-info {
+    align-items: center;
+  }
+
+  .cart-actions {
+    justify-content: center;
+  }
+
+  .cart-summary {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}
